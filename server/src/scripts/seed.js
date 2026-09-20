@@ -37,6 +37,9 @@ export async function seedOwner() {
   return { created: true }
 }
 
+import { fileURLToPath } from 'url'
+import path from 'path'
+
 async function main() {
   await connectDB(process.env.MONGODB_URI)
   try {
@@ -46,7 +49,8 @@ async function main() {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1].replace(/\\/g, '/')}`) {
+const isEntry = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+if (isEntry) {
   main().catch((err) => {
     console.error('[seed] Failed:', err.message)
     process.exitCode = 1
