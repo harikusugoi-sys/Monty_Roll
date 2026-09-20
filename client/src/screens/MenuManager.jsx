@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { refreshMenuFromServer } from '../db/dexie.js'
+import { apiUrl } from '../api/config.js'
 
 function isVeg(name = '') {
   const lower = name.toLowerCase()
@@ -30,7 +31,7 @@ export default function MenuManager({ session }) {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('/api/menu-items?all=true', {
+      const res = await fetch(apiUrl('/api/menu-items?all=true'), {
         headers: { authorization: `Bearer ${session.token}` },
       })
       if (!res.ok) throw new Error(`Failed to load items (${res.status})`)
@@ -54,7 +55,7 @@ export default function MenuManager({ session }) {
     if (!newName || !newPrice) return
     setAdding(true)
     try {
-      const res = await fetch('/api/menu-items', {
+      const res = await fetch(apiUrl('/api/menu-items'), {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -86,7 +87,7 @@ export default function MenuManager({ session }) {
     if (!editingItem || !editPriceVal) return
     setSavingPrice(true)
     try {
-      const res = await fetch(`/api/menu-items/${editingItem._id}`, {
+      const res = await fetch(apiUrl(`/api/menu-items/${editingItem._id}`), {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',
@@ -109,7 +110,7 @@ export default function MenuManager({ session }) {
 
   async function toggleActive(item) {
     try {
-      const res = await fetch(`/api/menu-items/${item._id}`, {
+      const res = await fetch(apiUrl(`/api/menu-items/${item._id}`), {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',

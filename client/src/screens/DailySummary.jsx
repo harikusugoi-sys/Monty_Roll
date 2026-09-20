@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { localDateString, db } from '../db/dexie.js'
+import { apiUrl } from '../api/config.js'
 
 export default function DailySummary({ session }) {
   const [selectedDate, setSelectedDate] = useState(() => localDateString())
@@ -24,7 +25,7 @@ export default function DailySummary({ session }) {
       // 1. Fetch orders for the date from server (fallback to local Dexie if offline)
       let dayOrders = []
       try {
-        const res = await fetch(`/api/orders?date=${date}`, {
+        const res = await fetch(apiUrl(`/api/orders?date=${date}`), {
           headers: { authorization: `Bearer ${session.token}` },
         })
         if (res.ok) {
@@ -40,7 +41,7 @@ export default function DailySummary({ session }) {
 
       // 2. Fetch existing daily reconciliation from server
       try {
-        const recRes = await fetch(`/api/reconciliation?date=${date}`, {
+        const recRes = await fetch(apiUrl(`/api/reconciliation?date=${date}`), {
           headers: { authorization: `Bearer ${session.token}` },
         })
         if (recRes.ok) {
@@ -61,7 +62,7 @@ export default function DailySummary({ session }) {
 
       // 3. Fetch 7-day trend history
       try {
-        const trendRes = await fetch('/api/reconciliation?days=7', {
+        const trendRes = await fetch(apiUrl('/api/reconciliation?days=7'), {
           headers: { authorization: `Bearer ${session.token}` },
         })
         if (trendRes.ok) {
@@ -166,7 +167,7 @@ export default function DailySummary({ session }) {
     if (upiActual === '' || cashActual === '') return
     setSubmittingRec(true)
     try {
-      const res = await fetch('/api/reconciliation', {
+      const res = await fetch(apiUrl('/api/reconciliation'), {
         method: 'POST',
         headers: {
           'content-type': 'application/json',

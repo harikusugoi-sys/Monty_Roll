@@ -1,4 +1,5 @@
 import { db } from './dexie.js'
+import { apiUrl } from '../api/config.js'
 
 let isSyncing = false
 const listeners = new Set()
@@ -49,7 +50,7 @@ export async function syncOrders(token) {
       })),
     }
 
-    const res = await fetch('/api/orders/sync', {
+    const res = await fetch(apiUrl('/api/orders/sync'), {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import { healthRouter } from './routes/health.js'
 import { authRouter } from './routes/auth.js'
 import { usersRouter } from './routes/users.js'
@@ -10,6 +11,7 @@ import { auditLogsRouter } from './routes/auditLogs.js'
 export function createApp() {
   const app = express()
 
+  app.use(cors())
   app.use(express.json())
 
   app.use('/api', healthRouter)

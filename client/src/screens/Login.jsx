@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { saveSession } from '../auth/session.js'
+import { apiUrl } from '../api/config.js'
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState('')
@@ -14,7 +15,7 @@ export default function Login({ onLogin }) {
     setBusy(true)
     setError(null)
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(apiUrl('/api/auth/login'), {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ username: username.trim(), password }),

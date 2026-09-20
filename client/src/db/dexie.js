@@ -1,4 +1,5 @@
 import Dexie from 'dexie'
+import { apiUrl } from '../api/config.js'
 
 /**
  * Offline source of truth (architecture.md §5/§6):
@@ -52,7 +53,7 @@ export async function rollbackTokenNumber(tokenNumber) {
 
 /** Best-effort menu refresh; failure is fine — the cached menu keeps working. */
 export async function refreshMenuFromServer(token) {
-  const res = await fetch('/api/menu-items', {
+  const res = await fetch(apiUrl('/api/menu-items'), {
     headers: { authorization: `Bearer ${token}` },
   })
   if (!res.ok) throw new Error(`Menu refresh failed (${res.status})`)

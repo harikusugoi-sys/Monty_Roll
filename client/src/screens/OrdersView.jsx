@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db, localDateString } from '../db/dexie.js'
 import { syncOrders } from '../db/sync.js'
+import { apiUrl } from '../api/config.js'
 
 export default function OrdersView({ session }) {
   const [filter, setFilter] = useState('all') // 'all' | 'unsettled' | 'cash' | 'upi' | 'voided'
@@ -56,7 +57,7 @@ export default function OrdersView({ session }) {
   async function updatePayment(clientId, newMethod) {
     await db.orders.update(clientId, { paymentMethod: newMethod, synced: 0 })
     try {
-      const res = await fetch(`/api/orders/${clientId}/payment`, {
+      const res = await fetch(apiUrl(`/api/orders/${clientId}/payment`), {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',
@@ -92,7 +93,7 @@ export default function OrdersView({ session }) {
     })
 
     try {
-      const res = await fetch(`/api/orders/${clientId}/void`, {
+      const res = await fetch(apiUrl(`/api/orders/${clientId}/void`), {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',
