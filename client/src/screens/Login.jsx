@@ -34,12 +34,6 @@ export default function Login({ onLogin }) {
     }
   }
 
-  function fillDevOwner() {
-    setUsername('9999999999')
-    setPassword('dev-test-pass')
-    setError(null)
-  }
-
   return (
     <main className="login-page-wrap">
       <div className="login-auth-card">
@@ -101,13 +95,6 @@ export default function Login({ onLogin }) {
             {busy ? 'Verifying Session...' : 'Sign In to Shift'}
           </button>
         </form>
-
-        <div className="demo-credentials-box">
-          <span className="demo-title">Quick Test Login (Local Dev Rig)</span>
-          <button type="button" className="demo-quick-btn" onClick={fillDevOwner}>
-            👑 Dev Owner: 9999999999 / dev-test-pass
-          </button>
-        </div>
       </div>
     </main>
   )
