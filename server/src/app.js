@@ -11,6 +11,9 @@ import { auditLogsRouter } from './routes/auditLogs.js'
 export function createApp() {
   const app = express()
 
+  // Trust reverse proxy (Render / Cloudflare) so express-rate-limit identifies client IP correctly
+  app.set('trust proxy', 1)
+
   app.use(cors())
   app.use(express.json())
 
