@@ -54,11 +54,11 @@ export default function Login({ onLogin }) {
             <label>Username / Phone Number</label>
             <input
               className="form-input"
-              inputMode="numeric"
+              type="text"
               autoComplete="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="e.g. 9999999999"
+              placeholder="Enter username or phone"
               autoFocus
               required
             />
