@@ -1,0 +1,6 @@
+packages:
+  - server
+  - client
+
+allowBuilds:
+  mongodb-memory-server: true

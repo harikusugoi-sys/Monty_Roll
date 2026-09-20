@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Environment — never commit real secrets (Atlas URI, JWT secret, owner password)
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Vite/PWA cache
+.vite/
+dev-dist/
+
+# Documentation & internal logs
+audit-report-monti-roll-pos.md
+PROGRESS.md
+docs/
+.freebuff

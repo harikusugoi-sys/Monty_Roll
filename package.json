@@ -1,0 +1,13 @@
+{
+  "name": "roll-shop-pos",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Mobile-first POS / order-management PWA for a local roll shop",
+  "scripts": {
+    "dev:client": "pnpm --filter client dev",
+    "dev:mock": "pnpm --filter server dev:mock",
+    "dev:server": "pnpm --filter server dev",
+    "seed": "pnpm --filter server seed",
+    "smoke": "pnpm --filter server smoke"
+  }
+}
